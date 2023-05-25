@@ -18,12 +18,12 @@ function Cineplex() {
     <div className="content">
       <Row>
         <Col>
-          <h1 className="text-center">Cineplexs</h1>
+          <h1 className="text-center">Rạp</h1>
         </Col>
       </Row>
       <Row>
         <Col>
-          <ModalForm isShow={false} method="add" title="Add New Cineplex" />
+          <ModalForm isShow={false} method="add" title="Thêm rạp" />
         </Col>
       </Row>
       <Row>

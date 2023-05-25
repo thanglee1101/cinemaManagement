@@ -22,7 +22,7 @@ function Ticket() {
     <div className="content">
       <Row>
         <Col>
-          <h1 className="text-center">Tickets</h1>
+          <h1 className="text-center">Vé</h1>
         </Col>
       </Row>
       <Row>

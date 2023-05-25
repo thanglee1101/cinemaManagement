@@ -45,7 +45,7 @@ function Cineplex() {
     <main className="flex-shrink-0">
       <Container className="w-75">
         <Row>
-          <h3 className="text-center">CGV CINEMAS</h3>
+          <h3 className="text-center">Nhom6 CINEMAS</h3>
         </Row>
         <Row>
           <div className="d-flex flex-wrap mt-2">

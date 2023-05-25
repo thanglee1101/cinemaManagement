@@ -11,7 +11,7 @@ import {
 function FormAddEdit(props) {
   const cineplex = props.data;
 
-  const [picture, setPicture] = useState(cineplex?.image ? cineplex?.image : null);
+  // const [picture, setPicture] = useState(cineplex?.image ? cineplex?.image : null);
   const [googleMapUrl, setGoogleMapUrl] = useState(
     cineplex?.googleMapsUrl
       ? cineplex?.googleMapsUrl
@@ -26,7 +26,7 @@ function FormAddEdit(props) {
 
     Object.keys(data).forEach((key) => {
       if (key === 'image') {
-        bodyFormData.append(key, data[key][0]);
+        bodyFormData.append(key, data[key]);
       } else {
         bodyFormData.append(key, data[key]);
       }
@@ -41,7 +41,7 @@ function FormAddEdit(props) {
 
     Object.keys(data).forEach((key) => {
       if (key === 'image') {
-        bodyFormData.append(key, data[key][0]);
+        bodyFormData.append(key, data[key]);
       } else {
         bodyFormData.append(key, data[key]);
       }
@@ -51,11 +51,11 @@ function FormAddEdit(props) {
     props.handleClose();
   };
 
-  const onChangePicture = (e) => {
-    if (e.target.files.length !== 0) {
-      setPicture(URL.createObjectURL(e.target.files[0]));
-    }
-  };
+  // const onChangePicture = (e) => {
+  //   if (e.target.files.length !== 0) {
+  //     setPicture(URL.createObjectURL(e.target.files[0]));
+  //   }
+  // };
 
   const onChangeGoogleMapUrl = (e) => {
     let url = e.target.value;
@@ -69,26 +69,29 @@ function FormAddEdit(props) {
       <Row>
         <Col>
           <Form.Group>
-            <Form.Label className="form-group required control-label">Image</Form.Label>
+            <Form.Label className="form-group required control-label">Ảnh</Form.Label>
             <Form.Control
-              type="file"
-              accept="image/*"
+              type="text"
+              // accept="image/*"
+              defaultValue={cineplex?.Image ? cineplex?.Image : ''}
               {...register('image')}
-              onChange={(e) => {
-                register('image').onChange(e);
-                onChangePicture(e);
-              }}
+              // onChange={(e) => {
+              //   register('image').onChange(e);
+                // onChangePicture(e);
+              // }}
+              autoComplete="name"
+              required
             />
           </Form.Group>
 
-          <Form.Group className="mt-2">
+          {/* <Form.Group className="mt-2">
             <Image src={picture} fluid />
-          </Form.Group>
+          </Form.Group> */}
         </Col>
 
         <Col>
           <Form.Group>
-            <Form.Label className="form-group required control-label">Name</Form.Label>
+            <Form.Label className="form-group required control-label">Tên</Form.Label>
             <Form.Control
               type="text"
               defaultValue={cineplex?.name ? cineplex?.name : ''}
@@ -99,7 +102,7 @@ function FormAddEdit(props) {
           </Form.Group>
 
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Address</Form.Label>
+            <Form.Label className="form-group required control-label">Địa chỉ</Form.Label>
             <Form.Control
               type="text"
               defaultValue={cineplex?.address ? cineplex?.address : ''}
@@ -111,7 +114,7 @@ function FormAddEdit(props) {
 
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">
-              Google Map URL
+              Google Map 
             </Form.Label>
             <Form.Control
               type="text"

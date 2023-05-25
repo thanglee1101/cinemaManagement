@@ -6,36 +6,35 @@ const basename = path.basename(__filename);
 const db = {};
 
 let sequelize = new Sequelize(
-  process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/cgv-cinemas',
-  {
-    dialect: 'postgres',
-    protocol: 'postgres',
-    dialectOptions: {
-      // Heroku config
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-      useUTC: false,
-    },
+    process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/cinema', {
+        dialect: 'postgres',
+        protocol: 'postgres',
+        dialectOptions: {
+            // Heroku config
+            // ssl: {
+            //     require: true,
+            //     rejectUnauthorized: false,
+            // },
+            useUTC: false,
+        },
 
-    timezone: '+07:00', //for writing to database
-  }
+        timezone: '+07:00', //for writing to database
+    }
 );
 
 fs.readdirSync(__dirname)
-  .filter((file) => {
-    return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
-  })
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
+    .filter((file) => {
+        return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
+    })
+    .forEach((file) => {
+        const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+        db[model.name] = model;
+    });
 
 Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
+    }
 });
 
 db.sequelize = sequelize;

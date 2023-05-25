@@ -33,7 +33,7 @@ function FormAddEdit(props) {
 
     Object.keys(data).forEach((key) => {
       if (key === 'poster') {
-        bodyFormData.append(key, data[key][0]);
+        bodyFormData.append(key, data[key]);
       } else {
         bodyFormData.append(key, data[key]);
       }
@@ -49,7 +49,7 @@ function FormAddEdit(props) {
 
     Object.keys(data).forEach((key) => {
       if (key === 'poster') {
-        bodyFormData.append(key, data[key][0]);
+        bodyFormData.append(key, data[key]);
       } else {
         bodyFormData.append(key, data[key]);
       }
@@ -59,11 +59,11 @@ function FormAddEdit(props) {
     props.handleClose();
   };
 
-  const onChangePicture = (e) => {
-    if (e.target.files.length !== 0) {
-      setPicture(URL.createObjectURL(e.target.files[0]));
-    }
-  };
+  // const onChangePicture = (e) => {
+  //   if (e.target.length !== 0) {
+  //     setPicture(URL.createObjectURL(e.target));
+  //   }
+  // };
 
   const onChangeVideoId = (e) => {
     let id = getId(e.target.value);
@@ -79,20 +79,13 @@ function FormAddEdit(props) {
           <Form.Group>
             <Form.Label className="form-group required control-label">Poster</Form.Label>
             <Form.Control
-              type="file"
-              accept="image/*"
+              type="text"
+              defaultValue={movie?.poster ? movie?.poster : ''}
               {...register('poster')}
-              onChange={(e) => {
-                register('poster').onChange(e);
-                onChangePicture(e);
-              }}
+              autoComplete="poster"
+              required
             />
           </Form.Group>
-
-          <Form.Group className="mt-2">
-            <Image src={picture} fluid />
-          </Form.Group>
-
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">Trailer</Form.Label>
             <Form.Control
@@ -107,7 +100,6 @@ function FormAddEdit(props) {
               required
             />
           </Form.Group>
-
           <Form.Group className="mt-2">
             <div className="embed-responsive embed-responsive-16by9">
               <iframe
@@ -122,10 +114,9 @@ function FormAddEdit(props) {
             </div>
           </Form.Group>
         </Col>
-
         <Col>
           <Form.Group>
-            <Form.Label className="form-group required control-label">Title</Form.Label>
+            <Form.Label className="form-group required control-label">Tên</Form.Label>
             <Form.Control
               type="text"
               defaultValue={movie?.title ? movie?.title : ''}
@@ -134,10 +125,9 @@ function FormAddEdit(props) {
               required
             />
           </Form.Group>
-
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">
-              Description
+              Mô tả
             </Form.Label>
             <Form.Control
               as="textarea"
@@ -150,10 +140,9 @@ function FormAddEdit(props) {
               required
             />
           </Form.Group>
-
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">
-              Director
+              Đạo diễn
             </Form.Label>
             <Form.Control
               type="text"
@@ -163,9 +152,8 @@ function FormAddEdit(props) {
               required
             />
           </Form.Group>
-
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Actor</Form.Label>
+            <Form.Label className="form-group required control-label">Diễn viên</Form.Label>
             <Form.Control
               type="text"
               defaultValue={movie?.actor ? movie?.actor : ''}
@@ -174,9 +162,8 @@ function FormAddEdit(props) {
               required
             />
           </Form.Group>
-
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Genre</Form.Label>
+            <Form.Label className="form-group required control-label">Thể loại</Form.Label>
             <Form.Control
               type="text"
               defaultValue={movie?.genre ? movie?.genre : ''}
@@ -185,12 +172,10 @@ function FormAddEdit(props) {
               required
             />
           </Form.Group>
-
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">
-              Release Date
+              Ngày phát hành
             </Form.Label>
-
             <DatePicker
               className="form-control"
               selected={startDate}
@@ -198,10 +183,9 @@ function FormAddEdit(props) {
               onChange={(date) => setStartDate(date)}
             />
           </Form.Group>
-
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">
-              Running Time
+              Thời lượng
             </Form.Label>
             <Form.Control
               type="number"
@@ -212,28 +196,26 @@ function FormAddEdit(props) {
               required
             />
           </Form.Group>
-
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">State</Form.Label>
+            <Form.Label className="form-group required control-label">Trạng thái</Form.Label>
             <Form.Select
               defaultValue={movie?.state ? movie?.state : ''}
               aria-label="Select state"
               {...register('state')}
               required>
-              <option value="coming-soon">Coming Soon</option>
-              <option value="now-showing">Now Showing</option>
+              <option value="coming-soon">Sắp chiếu</option>
+              <option value="now-showing">Đang chiếu</option>
             </Form.Select>
           </Form.Group>
-
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Active</Form.Label>
+            <Form.Label className="form-group required control-label">Hiển thị</Form.Label>
             <Form.Select
               defaultValue={movie?.active.toString() ? movie.active === true : ''}
               aria-label="Select active"
               {...register('active')}
               required>
-              <option value="true">True</option>
-              <option value="false">False</option>
+              <option value="true">Có</option>
+              <option value="false">Không</option>
             </Form.Select>
           </Form.Group>
         </Col>
@@ -241,5 +223,4 @@ function FormAddEdit(props) {
     </Form>
   );
 }
-
 export default FormAddEdit;

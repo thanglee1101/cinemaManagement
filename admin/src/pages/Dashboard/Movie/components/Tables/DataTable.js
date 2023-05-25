@@ -28,37 +28,37 @@ function DataTable(props) {
       text: 'Poster',
       sortable: true,
       cell: (movie) => {
-        return <Image src={movie.poster} width={120}></Image>;
+        return <Image src={movie.poster}  width={120}></Image>;
       },
     },
     {
       key: 'title',
-      text: 'Title',
+      text: 'Tên',
       sortable: true,
       width: 150,
     },
     {
       key: 'director',
-      text: 'Director',
+      text: 'Đạo diễn',
     },
     {
       key: 'actor',
-      text: 'Actor',
+      text: 'Diễn viên',
       width: 200,
     },
     {
       key: 'genre',
-      text: 'Genre',
+      text: 'Thể loại',
       width: 200,
     },
     {
       key: 'running_time',
-      text: 'Running Time',
+      text: 'Thời lượng',
       sortable: true,
     },
     {
       key: 'release_date',
-      text: 'Release Date',
+      text: 'Ngày phát hành',
       sortable: true,
       cell: (movie) => {
         return moment(movie.release_date).format('DD/MM/YYYY');
@@ -82,23 +82,23 @@ function DataTable(props) {
     },
     {
       key: 'state',
-      text: 'State',
+      text: 'Trạng thái',
       sortable: true,
       cell: (movie) => {
-        return movie.state === 'now-showing' ? 'Now Showing' : 'Coming Soon';
+        return movie.state === 'now-showing' ?'Đang chiếu' : 'Sắp chiếu';
       },
     },
     {
       key: 'active',
-      text: 'Active',
+      text: 'Hiển thị',
       sortable: true,
       cell: (movie) => {
-        return movie.active === true ? 'True' : 'False';
+        return movie.active === true ? 'Có' : 'Không';
       },
     },
     {
       key: 'action',
-      text: 'Action',
+      text: 'Hoạt động',
       cell: (movie) => {
         return (
           <Button className="button-trash" onClick={() => deleteMovie(movie.id)}>
@@ -141,7 +141,7 @@ function DataTable(props) {
   return (
     <>
       {isShow ? (
-        <ModalForm isShow={isShow} data={data} method="eidt" title="Edit Movie" />
+        <ModalForm isShow={isShow} data={data} method="eidt" title="Sửa phim" />
       ) : (
         ''
       )}

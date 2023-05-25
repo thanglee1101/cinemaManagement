@@ -18,12 +18,12 @@ function Movie() {
     <div className="content">
       <Row>
         <Col>
-          <h1 className="text-center">Movies</h1>
+          <h1 className="text-center">Phim</h1>
         </Col>
       </Row>
       <Row>
         <Col>
-          <ModalForm isShow={false} method="add" title="Add New Movie" />
+          <ModalForm isShow={false} method="add" title="Thêm phim" />
         </Col>
       </Row>
       <Row>

@@ -21,7 +21,7 @@ function User() {
     <div className="content">
       <Row>
         <Col>
-          <h1 className="text-center">Users</h1>
+          <h1 className="text-center">Khách hàng</h1>
         </Col>
       </Row>
       <Row>

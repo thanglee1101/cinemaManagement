@@ -31,8 +31,8 @@ function Login() {
         <div className="col-lg-7 text-start">
           <img className="w-75" alt="cgvcinemas-logo" src="https://i.imgur.com/Lo5FKd6.png"></img>
           <p className="text-lg-start mt-3 fw-bold">
-            Trải nghiệm điện ảnh chất lượng nhất tại cụm rạp CGV trên toàn quốc. <br></br>Trang
-            thông tin tổng hợp lịch chiếu, trailers phim mới nhất tại CGV Cinemas Việt Nam.
+            Trải nghiệm điện ảnh chất lượng nhất tại cụm rạp Nhóm 6. <br></br>Trang
+            thông tin tổng hợp lịch chiếu, trailers phim mới nhất tại Nhóm 6.
           </p>
         </div>
         <div className="col-md-10 mx-auto col-lg-5">

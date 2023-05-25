@@ -12,7 +12,7 @@ function Showtime() {
     <div className="content">
       <Row>
         <Col>
-          <h1 className="text-center">Showtimes</h1>
+          <h1 className="text-center">Lịch chiếu</h1>
         </Col>
       </Row>
       <Row>

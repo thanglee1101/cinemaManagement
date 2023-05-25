@@ -28,12 +28,12 @@ function DataTable(props) {
     },
     {
       key: 'title',
-      text: 'Movie',
+      text: 'Tên',
       sortable: true,
     },
     {
       key: 'release_date',
-      text: 'Release Date',
+      text: 'Ngày phát hành',
       sortable: true,
       cell: (movie) => {
         return moment(movie.release_date).format('DD/MM/YYYY');
@@ -41,21 +41,21 @@ function DataTable(props) {
     },
     {
       key: 'running_time',
-      text: 'Running Time',
+      text: 'Thời lượng',
       sortable: true,
       cell: (movie) => {
-        return movie.running_time + ' minutes';
+        return movie.running_time + ' Phút';
       },
     },
     {
       key: 'action',
-      text: 'Showtimes',
+      text: 'Lịch chiếu',
       cell: (movie) => {
         const url = `/dashboard/showtimes/${movie.id}`;
         return (
           <Link to={{ pathname: url, state: { movie } }}>
             <Button className="button-detail">
-              <span>Detail</span>
+              <span>Chi tiết</span>
               <i className="bx bx-detail button-icon  bx-detail"></i>
             </Button>
           </Link>

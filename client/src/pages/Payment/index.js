@@ -81,7 +81,7 @@ function Payment() {
                 </div>
               </label>
             </div>
-            <div className="form-check d-flex align-items-center mt-2">
+            {/* <div className="form-check d-flex align-items-center mt-2">
               <input
                 className="form-check-input me-2"
                 name="exampleRadios"
@@ -143,7 +143,7 @@ function Payment() {
                   <span className="ms-1">ViettelPay</span>
                 </div>
               </label>
-            </div>
+            </div> */}
           </Col>
           <Col className="count_down_clock me-2" xs={2}>
             <div className="d-flex justify-content-center align-items-center h-100">

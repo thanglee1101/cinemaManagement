@@ -56,12 +56,12 @@ function DetailPage(props) {
         </Form.Group>
 
         <Form.Group>
-          <p className="text-center">{movie?.running_time} minutes</p>
+          <p className="text-center">{movie?.running_time} Phút</p>
         </Form.Group>
 
         <Form.Group>
           <p className="text-center">
-            {movie?.state === 'now-showing' ? 'Now Showing' : 'Coming Soon'}
+            {movie?.state === 'now-showing' ? 'Đang chiếu' : 'Sắp chiếu'}
           </p>
         </Form.Group>
       </Col>
@@ -70,7 +70,7 @@ function DetailPage(props) {
           cineplexs={cineplexs}
           isShow={false}
           method="add"
-          title="Add New Showtime"
+          title="Thêm lịch chiếu"
         />
         <DataTable cineplexs={cineplexs} showtimes={showtimes} />
       </Col>

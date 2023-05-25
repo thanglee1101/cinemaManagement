@@ -19,7 +19,7 @@ function DataTable(props) {
     },
     {
       key: 'avatar',
-      text: 'Avatar',
+      text: 'Ảnh',
       sortable: true,
       cell: (user) => {
         return <Image className="img_user_profile" src={user.avatar}></Image>;
@@ -27,12 +27,12 @@ function DataTable(props) {
     },
     {
       key: 'fullname',
-      text: 'Full name',
+      text: 'Họ tên',
       sortable: true,
     },
     {
       key: 'phone',
-      text: 'Phone',
+      text: 'Sdt',
       sortable: true,
     },
     {
@@ -42,12 +42,12 @@ function DataTable(props) {
     },
     {
       key: 'address',
-      text: 'Address',
+      text: 'Địa chỉ',
       sortable: true,
     },
     {
       key: 'birthday',
-      text: 'Birthday',
+      text: 'Ngày sinh',
       sortable: true,
       cell: (user) => {
         return moment(user.birthday).format('DD/MM/YYYY');
@@ -55,7 +55,7 @@ function DataTable(props) {
     },
     {
       key: 'status',
-      text: 'Status',
+      text: 'Trạng thái',
       sortable: true,
     },
   ];

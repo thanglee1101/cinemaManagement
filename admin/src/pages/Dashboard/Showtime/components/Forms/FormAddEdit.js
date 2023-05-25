@@ -45,7 +45,7 @@ function FormAddEdit(props) {
         <Col>
           <Form.Group>
             <Form.Label className="form-group required control-label">
-              Cineplex
+              Rạp
             </Form.Label>
             <Form.Select
               defaultValue={
@@ -53,7 +53,7 @@ function FormAddEdit(props) {
                   ? showtime?.Cinema?.cineplex_id
                   : currentCineplexId
               }
-              aria-label="Select Cineplex"
+              aria-label="Chọn rạp"
               {...register('cineplex_id')}
               onChange={(e) => {
                 register('cineplex_id').onChange(e);
@@ -71,10 +71,10 @@ function FormAddEdit(props) {
           </Form.Group>
 
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Cinema</Form.Label>
+            <Form.Label className="form-group required control-label">Phòng</Form.Label>
             <Form.Select
               defaultValue={showtime?.Cinema?.id ? showtime?.Cinema?.id : 1}
-              aria-label="Select Cinema"
+              aria-label="Chọn Phòng"
               {...register('cinema_id')}
               required>
               {cineplexs
@@ -93,7 +93,7 @@ function FormAddEdit(props) {
         <Col>
           <Form.Group>
             <Form.Label className="form-group required control-label">
-              Date Time Start
+              Thời gian bắt đầu
             </Form.Label>
             <Form.Control
               type="datetime-local"
@@ -109,7 +109,7 @@ function FormAddEdit(props) {
           </Form.Group>
 
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Price</Form.Label>
+            <Form.Label className="form-group required control-label">Giá</Form.Label>
             <Form.Control
               type="number"
               {...register('price')}

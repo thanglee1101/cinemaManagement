@@ -24,7 +24,7 @@ function DataTable(props) {
     },
     {
       key: 'image',
-      text: 'Image',
+      text: 'Ảnh',
       sortable: true,
       cell: (cineplex) => {
         return <Image src={cineplex.image} width={120}></Image>;
@@ -32,13 +32,13 @@ function DataTable(props) {
     },
     {
       key: 'name',
-      text: 'Name',
+      text: 'Tên',
       sortable: true,
       width: 300,
     },
     {
       key: 'address',
-      text: 'Address',
+      text: 'Địa chỉ',
       sortable: true,
     },
     {
@@ -58,7 +58,7 @@ function DataTable(props) {
     },
     {
       key: 'action',
-      text: 'Action',
+      text: 'Hoạt động',
       cell: (cineplex) => {
         return (
           <Button className="button-trash" onClick={() => deleteCineplex(cineplex.id)}>
@@ -94,7 +94,7 @@ function DataTable(props) {
   return (
     <>
       {isShow ? (
-        <ModalForm isShow={isShow} data={data} method="eidt" title="Edit Cineplex" />
+        <ModalForm isShow={isShow} data={data} method="eidt" title="Sửa rạp chiếu" />
       ) : (
         ''
       )}

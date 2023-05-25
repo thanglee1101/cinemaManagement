@@ -33,14 +33,14 @@ function ForgotPassword() {
         <div className="col-lg-7 text-start">
           <img className="w-75" alt="cgvcinemas-logo" src="https://i.imgur.com/Lo5FKd6.png"></img>
           <p className="text-lg-start mt-3 fw-bold">
-            Trải nghiệm điện ảnh chất lượng nhất tại cụm rạp CGV trên toàn quốc. <br></br>Trang
-            thông tin tổng hợp lịch chiếu, trailers phim mới nhất tại CGV Cinemas Việt Nam.
+            Trải nghiệm điện ảnh chất lượng nhất tại cụm rạp Nhóm 6. <br></br>Trang
+            thông tin tổng hợp lịch chiếu, trailers phim mới nhất tại Nhóm 6.
           </p>
         </div>
         <div className="col-md-10 mx-auto col-lg-5">
           <form onSubmit={handleSubmit(onSubmit)} className="p-4 p-md-5 border rounded-3 bg-light">
             <h3>Phục hồi mật khẩu của bạn</h3>
-            <p>Nhập địa chỉ email được liên kết với tài khoản CGV Cinemas của bạn.</p>
+            <p>Nhập địa chỉ email được liên kết với tài khoản Nhóm 6 Cinemas của bạn.</p>
             <div className="form-floating mb-3">
               <input
                 type="email"

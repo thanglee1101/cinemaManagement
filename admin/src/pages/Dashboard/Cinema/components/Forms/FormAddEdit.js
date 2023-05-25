@@ -84,7 +84,7 @@ function FormAddEdit(props) {
       onSubmit={cinema ? handleSubmit(onUpdateSubmit) : handleSubmit(onAddSubmit)}>
       <Row>
         <Form.Group className="mt-3">
-          <Form.Label className="form-group required control-label">Cineplex</Form.Label>
+          <Form.Label className="form-group required control-label">Rạp</Form.Label>
           <Form.Select
             defaultValue={cinema?.cineplex_id ? cinema?.cineplex_id : ''}
             aria-label="Select Cineplex"
@@ -103,7 +103,7 @@ function FormAddEdit(props) {
       <Row>
         <Col>
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Name</Form.Label>
+            <Form.Label className="form-group required control-label">Tên</Form.Label>
             <Form.Control
               type="text"
               defaultValue={cinema?.name ? cinema?.name : ''}
@@ -115,7 +115,7 @@ function FormAddEdit(props) {
         </Col>
         <Col>
           <Form.Group className="mt-3">
-            <Form.Label className="form-group required control-label">Type</Form.Label>
+            <Form.Label className="form-group required control-label">Loại</Form.Label>
             <Form.Select
               defaultValue={cinema?.cinemaType_id ? cinema?.cinemaType_id : ''}
               aria-label="Select Types"
@@ -136,7 +136,7 @@ function FormAddEdit(props) {
         <Col>
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">
-              Vertical Size
+              Số hàng
             </Form.Label>
             <Form.Control
               type="number"
@@ -156,7 +156,7 @@ function FormAddEdit(props) {
         <Col>
           <Form.Group className="mt-3">
             <Form.Label className="form-group required control-label">
-              Horizontal Size
+              Số cột
             </Form.Label>
             <Form.Control
               type="number"

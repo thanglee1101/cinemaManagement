@@ -12,12 +12,12 @@ function Footer() {
       <div className="footer-cgv-address text-center mt-3">
         <div className="cgv-address-content">
           <div className="text-cgv-address">
-            <h5>CÔNG TY TNHH CJ CGV VIETNAM</h5>
+            <h5>Nhóm 6</h5>
             <p className="mb-0">
-              Địa Chỉ:&nbsp;Tầng 2, Rivera Park Saigon - Số 7/28 Thành Thái, P.14, Q.10, TPHCM.
+              Địa Chỉ:&nbsp;Tòa nhà A2 - Học Viện Công Nghệ Bưu Chính Viễn Thông
             </p>
-            <p className="mb-0">Hotline: 1900 6017</p>
-            <p className="mb-0">COPYRIGHT 2021 CJ CGV. All RIGHTS RESERVED .</p>
+            <p className="mb-0">Hotline: 123456789</p>
+            <p className="mb-0">COPYRIGHT 2023 by Nhóm 6</p>
             <div className="d-flex justify-content-center mt-2">
               <div className="logo-footer-cgv"></div>
             </div>

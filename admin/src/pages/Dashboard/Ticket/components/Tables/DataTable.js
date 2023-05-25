@@ -18,7 +18,7 @@ function DataTable(props) {
     },
     {
       key: 'customer',
-      text: 'Customer',
+      text: 'Khách hàng',
       sortable: true,
       cell: (ticket) => {
         return ticket.Booking.User.fullname;
@@ -26,7 +26,7 @@ function DataTable(props) {
     },
     {
       key: 'movie',
-      text: 'Movie',
+      text: 'Phim',
       sortable: true,
       cell: (ticket) => {
         return ticket.Booking.Showtime.Movie.title;
@@ -34,7 +34,7 @@ function DataTable(props) {
     },
     {
       key: 'showtime',
-      text: 'Showtime',
+      text: 'Lịch chiếu',
       sortable: true,
       cell: (ticket) => {
         return (
@@ -50,7 +50,7 @@ function DataTable(props) {
     },
     {
       key: 'cinema',
-      text: 'Cinema',
+      text: 'Phòng',
       sortable: true,
       cell: (ticket) => {
         return ticket.Booking.Showtime.Cinema.name;
@@ -58,7 +58,7 @@ function DataTable(props) {
     },
     {
       key: 'type',
-      text: 'Type',
+      text: 'Loại',
       sortable: true,
       cell: (ticket) => {
         return ticket.Booking.Showtime.Cinema.CinemaType.name;
@@ -66,7 +66,7 @@ function DataTable(props) {
     },
     {
       key: 'cineplex',
-      text: 'Cineplex',
+      text: 'Rạp',
       sortable: true,
       cell: (ticket) => {
         return ticket.Booking.Showtime.Cinema.Cineplex.name;
@@ -74,7 +74,7 @@ function DataTable(props) {
     },
     {
       key: 'seat',
-      text: 'Seat',
+      text: 'Ghế',
       sortable: true,
       cell: (ticket) => {
         return ticket.seat_code;
@@ -82,7 +82,7 @@ function DataTable(props) {
     },
     {
       key: 'price',
-      text: 'Price',
+      text: 'Giá',
       sortable: true,
       cell: (ticket) => {
         return ticket.price.toLocaleString('it-IT', {

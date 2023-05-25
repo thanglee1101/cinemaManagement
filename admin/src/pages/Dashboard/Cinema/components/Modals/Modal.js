@@ -12,7 +12,7 @@ function ModalForm(props) {
   const buutonAdd = (
     <Button className="button-add" onClick={handleShow}>
       <BsFillPlusSquareFill className="button-icon" />
-      Add Cinema
+      Thêm phòng chiếu
     </Button>
   );
 
@@ -39,10 +39,10 @@ function ModalForm(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Đóng
           </Button>
           <Button form="form-add-edit" className="button-add" type="submit">
-            {props.method === 'add' ? 'Submit' : 'Update'}
+            {props.method === 'add' ? 'Lưu' : 'Cập Nhật'}
           </Button>
         </Modal.Footer>
       </Modal>

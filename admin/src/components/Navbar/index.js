@@ -22,9 +22,9 @@ function Navbar() {
     btn.onclick = function () {
       sidebar.classList.toggle('active');
     };
-    searchBtn.onclick = function () {
-      sidebar.classList.toggle('active');
-    };
+    // searchBtn.onclick = function () {
+    //   sidebar.classList.toggle('active');
+    // };
 
     const pathname = window.location.pathname.split('/');
     let currentElement = $(
@@ -42,17 +42,13 @@ function Navbar() {
     <div className="sidebar">
       <div className="logo_content">
         <div className="logo">
-          <i className="bx bx-bracket"></i>
-          <div className="logo_name">CGV Cinemas</div>
+          {/* <i className="bx bx-bracket"></i> */}
+          <div className="logo_name">Nhom6 Cinemas</div>
         </div>
         <i className="bx bx-menu" id="btn" />
       </div>
       <ul className="nav_list">
-        <li>
-          <i className="bx bx-search" />
-          <input type="text" placeholder="Search..." />
-          <span className="tooltip">Search</span>
-        </li>
+       
         <li>
           <Link to="/dashboard">
             <i className="bx bx-grid-alt" />
@@ -63,70 +59,67 @@ function Navbar() {
         <li>
           <Link to="/dashboard/movies">
             <i className="bx bx-movie-play"></i>
-            <span className="links_name">Movie</span>
+            <span className="links_name">Phim</span>
           </Link>
-          <span className="tooltip">Movie</span>
+          <span className="tooltip">Phim</span>
         </li>
         <li>
           <Link to="/dashboard/cineplexs">
             <i className="bx bxs-collection"></i>
-            <span className="links_name">Cineplex</span>
+            <span className="links_name">Rạp</span>
           </Link>
-          <span className="tooltip">Cineplex</span>
+          <span className="tooltip">Rạp</span>
         </li>
         <li>
           <Link to="/dashboard/cinemas">
             <i className="bx bx-tv"></i>
-            <span className="links_name">Cinema</span>
+            <span className="links_name">Phòng chiếu</span>
           </Link>
-          <span className="tooltip">Cinema</span>
+          <span className="tooltip">Phòng chiếu</span>
         </li>
         <li>
           <Link to="/dashboard/showtimes">
             <i className="bx bx-time-five"></i>
-            <span className="links_name">Show Time</span>
+            <span className="links_name">Lịch chiếu</span>
           </Link>
-          <span className="tooltip">Show Time</span>
+          <span className="tooltip">Lịch chiếu</span>
         </li>
         <li>
           <Link to="/dashboard/tickets">
             <i className="bx bxs-coupon"></i>
-            <span className="links_name">Ticket</span>
+            <span className="links_name">Vé</span>
           </Link>
-          <span className="tooltip">Ticket</span>
+          <span className="tooltip">Vé</span>
         </li>
         <li>
           <Link to="/dashboard/users">
             <i className="bx bx-user" />
-            <span className="links_name">User</span>
+            <span className="links_name">Khách hàng</span>
           </Link>
-          <span className="tooltip">User</span>
+          <span className="tooltip">Khách hàng</span>
         </li>
         <li>
           <Link to="/dashboard/statistics">
             <i className="bx bx-bar-chart"></i>
-            <span className="links_name">Statistic</span>
+            <span className="links_name">Báo cáo thống kê</span>
           </Link>
-          <span className="tooltip">Statistic</span>
+          <span className="tooltip">Báo cáo thống kê</span>
         </li>
-        <li>
+        {/* <li>
           <Link to="/dashboard/settings">
             <i className="bx bx-cog" />
             <span className="links_name">Setting</span>
           </Link>
           <span className="tooltip">Setting</span>
-        </li>
+        </li> */}
       </ul>
       <div className="profile_content">
         <div className="profile">
           <div className="profile_details">
-            <img
-              src="https://play-lh.googleusercontent.com/dVQ6d8I7XDOkr72-jcAUHsCfQ_ih9p9HUaca82obM6LlmJOKAA8BuY776Xns40Nifg"
-              alt="cgv"
-            />
+           
             <div className="name_job">
-              <div className="name">Nguyen</div>
-              <div className="job">Full Stack Overflow</div>
+              <div className="name">Nhóm 6</div>
+              
             </div>
           </div>
           <Link to="/" onClick={onSubmitLogout}>

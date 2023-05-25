@@ -24,12 +24,12 @@ function DataTable(props) {
     },
     {
       key: 'name',
-      text: 'Name',
+      text: 'Tên',
       sortable: true,
     },
     {
       key: 'cineplex',
-      text: 'Cineplex',
+      text: 'Rạp',
       sortable: true,
       cell: (cinema) => {
         return cinema.Cineplex.name;
@@ -37,7 +37,7 @@ function DataTable(props) {
     },
     {
       key: 'cinemaType',
-      text: 'Cinema Type',
+      text: 'Loại',
       sortable: true,
       cell: (cinema) => {
         return cinema.CinemaType.name;
@@ -45,15 +45,15 @@ function DataTable(props) {
     },
     {
       key: 'vertical_size',
-      text: 'Vertical Size',
+      text: 'Số Hàng',
     },
     {
       key: 'horizontal_size',
-      text: 'Horizontal Size',
+      text: 'Số cột',
     },
     {
       key: 'action',
-      text: 'Action',
+      text: 'Hành động',
       cell: (cinema) => {
         return (
           <Button className="button-trash" onClick={() => deleteCinema(cinema.id)}>
@@ -95,7 +95,7 @@ function DataTable(props) {
           cineplexs={cineplexs}
           cinemaTypes={cinemaTypes}
           method="eidt"
-          title="Edit Cinema"
+          title="Sửa phòng chiếu"
         />
       ) : (
         ''

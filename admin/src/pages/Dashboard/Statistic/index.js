@@ -7,8 +7,8 @@ import moment from 'moment';
 import './styles.scss';
 
 function Statistic() {
-  const [dataMovies, setDataMovies] = useState({});
-  const [dataCineplexs, setDataCineplexs] = useState({});
+  const [dataMovies, setDataMovies] = useState({labels:[],datasets:[]});
+  const [dataCineplexs, setDataCineplexs] = useState({labels:[],datasets:[]});
   const [startDateMovies, setStartDateMovies] = useState(null);
   const [endDateMovies, setEndDateMovies] = useState(null);
 
@@ -24,7 +24,6 @@ function Statistic() {
       to: end ? moment(end).format('YYYY-MM-DD') : '',
     });
   };
-
   const onChangeDateCinplexs = (dates) => {
     const [start, end] = dates;
     setStartDateCineplexs(start);
@@ -44,26 +43,23 @@ function Statistic() {
     const response = await axiosClient.get('/statistic/cineplexs', { params });
     setDataCineplexs(response);
   };
-
   useEffect(() => {
     const fetchDataSetsMovies = async () => {
       const response = await axiosClient.get('/statistic/movies');
       setDataMovies(response);
     };
     fetchDataSetsMovies();
-
     const fetchDataSetsCineplexs = async () => {
       const response = await axiosClient.get('/statistic/cineplexs');
       setDataCineplexs(response);
     };
     fetchDataSetsCineplexs();
-
     return () => {
       setDataMovies([]);
       setDataCineplexs([]);
     };
   }, []);
-
+  console.log(dataMovies);
   const options = {
     responsive: true,
     tooltips: {
@@ -79,10 +75,10 @@ function Statistic() {
       },
     },
   };
-
+  console.log(1);
   return (
     <div className="content">
-      <Row>
+      {/* <Row>
         <Col>
           <h1 className="text-center">Statistics</h1>
         </Col>
@@ -142,7 +138,9 @@ function Statistic() {
           </Row>
           <Bar className="mb-5" data={dataCineplexs} options={options} />
         </Col>
-      </Row>
+      </Row> */}
+      {/* <iframe title="dashboarh" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=0ccec969-74a6-4c6d-a28d-fdb085cd168b&autoAuth=true&ctid=e7572e92-7aee-4713-a3c4-ba64888ad45f" frameborder="0" allowFullScreen="true"></iframe> */}
+      <iframe title="dashboarh" width="100%" height="100%" src="https://app.powerbi.com/reportEmbed?reportId=0ccec969-74a6-4c6d-a28d-fdb085cd168b&autoAuth=true&ctid=e7572e92-7aee-4713-a3c4-ba64888ad45f" frameborder="0" allowFullScreen="true"></iframe>
     </div>
   );
 }

@@ -27,7 +27,7 @@ function Cinema() {
     <div className="content">
       <Row>
         <Col>
-          <h1 className="text-center">Cinemas</h1>
+          <h1 className="text-center">Phòng chiếu</h1>
         </Col>
       </Row>
       <Row>
@@ -37,7 +37,7 @@ function Cinema() {
             cineplexs={cineplexs}
             cinemaTypes={cinemaTypes}
             method="add"
-            title="Add New Cinema"
+            title="Thêm mới Phòng chiếu"
           />
         </Col>
       </Row>

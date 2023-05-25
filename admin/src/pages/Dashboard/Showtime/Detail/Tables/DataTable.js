@@ -25,7 +25,7 @@ function DataTable(props) {
     },
     {
       key: 'date',
-      text: 'Date',
+      text: 'Ngày',
       sortable: true,
       cell: (showtime) => {
         return moment(showtime?.start_time).format('DD/MM/YYYY');
@@ -33,7 +33,7 @@ function DataTable(props) {
     },
     {
       key: 'start_time',
-      text: 'Start Time',
+      text: 'Bắt đầu',
       sortable: true,
       cell: (showtime) => {
         return moment(showtime?.start_time).format('HH:mm A');
@@ -41,7 +41,7 @@ function DataTable(props) {
     },
     {
       key: 'end_time',
-      text: 'End Time',
+      text: 'Kết thúc',
       sortable: true,
       cell: (showtime) => {
         return moment(showtime?.end_time).format('HH:mm A');
@@ -49,7 +49,7 @@ function DataTable(props) {
     },
     {
       key: 'cinema',
-      text: 'Cinema',
+      text: 'Phòng',
       sortable: true,
       cell: (showtime) => {
         return showtime?.Cinema.name;
@@ -57,7 +57,7 @@ function DataTable(props) {
     },
     {
       key: 'type',
-      text: 'Type',
+      text: 'Loại',
       sortable: true,
       cell: (showtime) => {
         return showtime?.Cinema.CinemaType.name;
@@ -65,7 +65,7 @@ function DataTable(props) {
     },
     {
       key: 'cineplex',
-      text: 'Cineplex',
+      text: 'Rạp',
       sortable: true,
       cell: (showtime) => {
         return showtime?.Cinema.Cineplex.name;
@@ -73,7 +73,7 @@ function DataTable(props) {
     },
     {
       key: 'price',
-      text: 'Price',
+      text: 'Giá',
       sortable: true,
       cell: (showtime) => {
         return showtime?.price.toLocaleString('it-IT', {
@@ -84,7 +84,7 @@ function DataTable(props) {
     },
     {
       key: 'action',
-      text: 'Action',
+      text: 'Hoạt động',
       cell: (showtime) => {
         return (
           <Button className="button-trash" onClick={() => deleteShowtime(showtime.id)}>
@@ -125,7 +125,7 @@ function DataTable(props) {
           isShow={isShow}
           data={data}
           method="eidt"
-          title="Edit Showtime"
+          title="Sửa lịch chiếu"
         />
       ) : (
         ''
