@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const http = require('http');
 import express from 'express';
 import cors from 'cors';
 import expressValidator from 'express-validator';
@@ -7,6 +7,9 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import swaggerUi from 'swagger-ui-express';
 const swaggerJsdoc = require('swagger-jsdoc');
+import { getByCineplexs, getByMovies, getByMonth } from './controllers/statisticController'
+
+const socketIO = require('socket.io');
 
 // Model
 import models from './models';
@@ -46,8 +49,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 app.use(
     cors({
         origin: [
-            'https://cgv-cinemas-web.herokuapp.com',
-            'https://admin-cgv-cinemas.herokuapp.com',
+
             'http://localhost:3000',
             'http://localhost:3001',
         ],
@@ -75,14 +77,38 @@ app.use(
         },
     })
 );
+const server = http.createServer(app);
+const io = socketIO(server);
 
-// app.use(function(req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-//     next();
-// });
 
+const sendStockData = async() => {
+    try {
+        let stockData = []
+        const resultMonth = await getByMonth()
+        const resultMovie = await getByMovies()
+        const resultCineplex = await getByCineplexs()
+        stockData.push(resultCineplex, resultMonth, resultMovie)
+        io.emit('stockData', stockData);
+    } catch (error) {
+        console.error('Error fetching stock data:', error);
+    }
+};
+setInterval(sendStockData, 2000);
+
+io.on('connection', (socket) => {
+    console.log('New client connected');
+
+    // Gửi dữ liệu chứng khoán mới cho client mới kết nối
+    sendStockData();
+
+    // Xử lý sự kiện khi client ngắt kết nối
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
+});
+
+
+setInterval(sendStockData, 2000);
 app.use(express.static('public'));
 
 // Route
@@ -121,9 +147,12 @@ app.listen(port, async() => {
     try {
         await models.sequelize.sync();
         console.log('Database connected!');
-        console.log(`🚀 Server running at http://${hostname}:${port}`);
+        console.log(` Server running at http://${hostname}:${port}`);
     } catch (error) {
         console.log('Failed to start server!');
         console.log(error);
     }
+});
+server.listen(5001, () => {
+    console.log(`Server is running on port ${5001}`);
 });

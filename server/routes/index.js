@@ -81,5 +81,9 @@ router.get('/users', AdminController.getUsers);
 // Statistic Router
 router.get('/statistic/movies', StatisticController.getByMovies);
 router.get('/statistic/cineplexs', StatisticController.getByCineplexs);
+router.get('/statistic/month', StatisticController.getByMonth);
+router.post('/statistic/downloadStatMonth', StatisticController.downloadReportMonth);
+router.post('/statistic/downloadStatCinemaplex', StatisticController.downloadReportCineplex);
+router.post('/statistic/downloadStatMovie', StatisticController.downloadReportMovie);
 
 export default router;

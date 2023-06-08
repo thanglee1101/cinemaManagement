@@ -10,15 +10,11 @@ let sequelize = new Sequelize(
         dialect: 'postgres',
         protocol: 'postgres',
         dialectOptions: {
-            // Heroku config
-            // ssl: {
-            //     require: true,
-            //     rejectUnauthorized: false,
-            // },
+
             useUTC: false,
         },
 
-        timezone: '+07:00', //for writing to database
+        timezone: '+07:00',
     }
 );
 

@@ -99,7 +99,7 @@ function History() {
                           {new Intl.NumberFormat('vi-VN', {
                             style: 'currency',
                             currency: 'VND',
-                          }).format(booking.Tickets[0].price)}
+                          }).format(booking.Tickets[0]?.price)}
                         </span>
                       </div>
                       <div>

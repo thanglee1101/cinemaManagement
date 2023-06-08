@@ -1,65 +1,142 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
-import { Bar } from 'react-chartjs-2';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Bar, Pie, Line } from 'react-chartjs-2';
 import axiosClient from '../../../api/axiosClient';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import './styles.scss';
+import axios from 'axios';
+import io from 'socket.io-client';
 
 function Statistic() {
-  const [dataMovies, setDataMovies] = useState({labels:[],datasets:[]});
-  const [dataCineplexs, setDataCineplexs] = useState({labels:[],datasets:[]});
-  const [startDateMovies, setStartDateMovies] = useState(null);
-  const [endDateMovies, setEndDateMovies] = useState(null);
+  const [stockData, setStockData] = useState();
 
-  const [startDateCineplexs, setStartDateCineplexs] = useState(null);
-  const [endDateCineplexs, setEndDateCineplexs] = useState(null);
+  const handleDownloadReportMonth = (datas) => {
 
-  const onChangeDateMovies = (dates) => {
-    const [start, end] = dates;
-    setStartDateMovies(start);
-    setEndDateMovies(end);
-    changeDataMovies({
-      from: start ? moment(start).format('YYYY-MM-DD') : '',
-      to: end ? moment(end).format('YYYY-MM-DD') : '',
-    });
-  };
-  const onChangeDateCinplexs = (dates) => {
-    const [start, end] = dates;
-    setStartDateCineplexs(start);
-    setEndDateCineplexs(end);
-    changeDataCineplexs({
-      from: start ? moment(start).format('YYYY-MM-DD') : '',
-      to: end ? moment(end).format('YYYY-MM-DD') : '',
-    });
-  };
+    axios({
+      url: 'http://127.0.0.1:5000/api/statistic/downloadStatMonth', // Đường dẫn đến API endpoint trên backend
+      method: 'POST',
+      responseType: 'blob',
+      data: datas// Xác định kiểu dữ liệu phản hồi là dạng blob (binary large object)
+    })
+      .then((response) => {
+        // Xử lý phản hồi thành công
+        console.log(response);
+        const contentDisposition = response.headers['content-disposition'];
+        let fileName = 'reportMonth.xlsx';
+        if (contentDisposition) {
+          const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = fileNameRegex.exec(contentDisposition);
+          if (matches != null && matches[1]) {
+            fileName = matches[1].replace(/['"]/g, '');
+          }
+        }
+        const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
+        console.log(link);
+        document.body.removeChild(link);
+      })
+      .catch((error) => {
+        // Xử lý lỗi khi tải xuống file Excel
+        console.error('Lỗi khi tải xuống file Excel:', error);
+      });
+  }
+  const handleDownloadReportCineplex = () => {
+    const data = []
+    if (stockData) {
+      data.push(stockData[0].labels)
+      data.push(stockData[0].datasets[0].data)
+    }
+    axios({
+      url: 'http://127.0.0.1:5000/api/statistic/downloadStatCinemaplex', // Đường dẫn đến API endpoint trên backend
+      method: 'POST',
+      responseType: 'blob',
+      data: data// Xác định kiểu dữ liệu phản hồi là dạng blob (binary large object)
+    })
+      .then((response) => {
+        // Xử lý phản hồi thành công
+        console.log(response);
+        const contentDisposition = response.headers['content-disposition'];
+        let fileName = 'reportCinemaplex.xlsx';
+        if (contentDisposition) {
+          const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = fileNameRegex.exec(contentDisposition);
+          if (matches != null && matches[1]) {
+            fileName = matches[1].replace(/['"]/g, '');
+          }
+        }
+        const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
+        console.log(link);
+        document.body.removeChild(link);
+      })
+      .catch((error) => {
+        // Xử lý lỗi khi tải xuống file Excel
+        console.error('Lỗi khi tải xuống file Excel:', error);
+      });
+  }
+  const handleDownloadReportMovies = () => {
+    const data = []
+    if (stockData) {
+      data.push(stockData[2].labels)
+      data.push(stockData[2].datasets[0].data)
+      data.push(stockData[2].datasets[1].data)
 
-  const changeDataMovies = async (params) => {
-    const response = await axiosClient.get('/statistic/movies', { params });
-    setDataMovies(response);
-  };
+    }
+    axios({
+      url: 'http://127.0.0.1:5000/api/statistic/downloadStatMovie', // Đường dẫn đến API endpoint trên backend
+      method: 'POST',
+      responseType: 'blob',
+      data: data// Xác định kiểu dữ liệu phản hồi là dạng blob (binary large object)
+    })
+      .then((response) => {
+        // Xử lý phản hồi thành công
+        console.log(response);
+        const contentDisposition = response.headers['content-disposition'];
+        let fileName = 'reportMovie.xlsx';
+        if (contentDisposition) {
+          const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = fileNameRegex.exec(contentDisposition);
+          if (matches != null && matches[1]) {
+            fileName = matches[1].replace(/['"]/g, '');
+          }
+        }
+        const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
+        console.log(link);
+        document.body.removeChild(link);
+      })
+      .catch((error) => {
+        // Xử lý lỗi khi tải xuống file Excel
+        console.error('Lỗi khi tải xuống file Excel:', error);
+      });
+  }
 
-  const changeDataCineplexs = async (params) => {
-    const response = await axiosClient.get('/statistic/cineplexs', { params });
-    setDataCineplexs(response);
-  };
   useEffect(() => {
-    const fetchDataSetsMovies = async () => {
-      const response = await axiosClient.get('/statistic/movies');
-      setDataMovies(response);
-    };
-    fetchDataSetsMovies();
-    const fetchDataSetsCineplexs = async () => {
-      const response = await axiosClient.get('/statistic/cineplexs');
-      setDataCineplexs(response);
-    };
-    fetchDataSetsCineplexs();
+    // Kết nối tới server Socket.IO
+    const socket = io('http://localhost:5001', { transports: ['websocket'] });
+    // Lắng nghe sự kiện nhận dữ liệu chứng khoán từ server
+    socket.on('stockData', (data) => {
+      setStockData(data);
+    });
+    // Cleanup kết nối khi component bị hủy
     return () => {
-      setDataMovies([]);
-      setDataCineplexs([]);
+      socket.disconnect();
     };
   }, []);
-  console.log(dataMovies);
+  console.log(stockData);
   const options = {
     responsive: true,
     tooltips: {
@@ -75,74 +152,74 @@ function Statistic() {
       },
     },
   };
-  console.log(1);
   return (
     <div className="content">
-      {/* <Row>
+      <Row>
         <Col>
-          <h1 className="text-center">Statistics</h1>
+          <h1 className="text-center">Thống kê</h1>
         </Col>
       </Row>
-      <Row>
+      <Row style={{ height: "400px" }}>
         <Col>
           <Row className="mt-3">
-            <Col></Col>
-            <Col></Col>
             <Col>
-              <h3 className="text-center">Movies</h3>
-            </Col>
-            <Col></Col>
-            <Col>
-              <Form.Group>
-                <DatePicker
-                  className="form-control text-center"
-                  selected={startDateMovies}
-                  startDate={startDateMovies}
-                  endDate={endDateMovies}
-                  dateFormat="dd/MM/yyyy"
-                  selectsRange
-                  isClearable={true}
-                  placeholderText="Select date range"
-                  onChange={onChangeDateMovies}
-                />
-              </Form.Group>
+              <h3 >Doanh thu theo phim</h3>
             </Col>
           </Row>
-          <Bar data={dataMovies} options={options} />
+          {stockData ? <Bar data={stockData[2]} options={options} /> : null}
+        </Col>
+        <Col>
+          <Row className="mt-3">
+            <Col>
+              <h3 >Doanh thu theo rạp</h3>
+            </Col>
+          </Row>
+          <Row style={{ paddingBottom: "50%" }}>
+            <Col></Col>
+            <Col>
+              {stockData ? <Pie data={stockData[0]} /> : null}
+            </Col>
+            <Col></Col>
+          </Row>
         </Col>
       </Row>
       <Row>
+        <Row className="mt-3">
+          <Col>
+            <h3 >Doanh thu theo Tháng</h3>
+          </Col>
+        </Row>
+        <Col></Col>
         <Col>
-          <Row className="mt-5">
-            <Col></Col>
-            <Col></Col>
-            <Col>
-              <h3 className="text-center">Cineplexs</h3>
-            </Col>
-            <Col></Col>
-            <Col>
-              <Form.Group>
-                <DatePicker
-                  className="form-control text-center"
-                  selected={startDateCineplexs}
-                  startDate={startDateCineplexs}
-                  endDate={endDateCineplexs}
-                  dateFormat="dd/MM/yyyy"
-                  selectsRange
-                  isClearable={true}
-                  placeholderText="Select date range"
-                  onChange={onChangeDateCinplexs}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Bar className="mb-5" data={dataCineplexs} options={options} />
+          {stockData ? <Line data={stockData[1]} /> : null}
         </Col>
-      </Row> */}
-      {/* <iframe title="dashboarh" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=0ccec969-74a6-4c6d-a28d-fdb085cd168b&autoAuth=true&ctid=e7572e92-7aee-4713-a3c4-ba64888ad45f" frameborder="0" allowFullScreen="true"></iframe> */}
-      <iframe title="dashboarh" width="100%" height="100%" src="https://app.powerbi.com/reportEmbed?reportId=0ccec969-74a6-4c6d-a28d-fdb085cd168b&autoAuth=true&ctid=e7572e92-7aee-4713-a3c4-ba64888ad45f" frameborder="0" allowFullScreen="true"></iframe>
+        <Col >
+
+          <Col style={{ paddingLeft: "20%" }}>
+
+            <Row>
+              <Button className='mt-3' onClick={handleDownloadReportMovies} style={{ width: "25%" }}>Xuất doanh thu theo phim</Button>
+
+            </Row>
+            <Row>
+              <Button className='mt-3' onClick={handleDownloadReportCineplex} style={{ width: "25%" }}>Xuất doanh thu theo rạp</Button>
+
+            </Row>
+            <Row>
+              {stockData ?
+                <Button onClick={() => handleDownloadReportMonth(stockData[1].datasets[0].data)} className='mt-3' style={{ width: "25%" }}>Xuất doanh thu theo tháng</Button>
+                :
+                <Button onClick={() => handleDownloadReportMonth([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])} className='mt-3' style={{ width: "25%" }}>Xuất doanh thu theo tháng</Button>
+              }
+            </Row>
+
+          </Col>
+
+        </Col>
+      </Row>
     </div>
   );
+
 }
 
 export default Statistic;
