@@ -1,6 +1,6 @@
 import { User } from '../models';
 import multer from 'multer';
-import firebase from '../services/firebase';
+
 
 let upload = multer({ storage: multer.memoryStorage() }).single('avatar');
 
@@ -38,33 +38,10 @@ const updateProfile = async(req, res, next) => {
                     address,
                 };
                 if (err) return res.send({ error: err.message });
-                if (req.file) {
-                    const blob = firebase.bucket.file(req.file.originalname);
 
-                    const blobWriter = blob.createWriteStream({
-                        metadata: {
-                            contentType: req.file.mimetype,
-                        },
-                    });
+                await user.update(parserData);
+                return res.status(200).send({ message: 'Updated' });
 
-                    blobWriter.on('error', (err) => next(err));
-
-                    blobWriter.on('finish', async() => {
-                        const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${
-              firebase.bucket.name
-            }/o/${encodeURI(blob.name)}?alt=media`;
-
-                        user.avatar = publicUrl;
-                        await user.save();
-                        await user.update(parserData);
-                        return res.status(200).send({ message: 'Updated' });
-                    });
-
-                    blobWriter.end(req.file.buffer);
-                } else {
-                    await user.update(parserData);
-                    return res.status(200).send({ message: 'Updated' });
-                }
             });
         } else {
             return res.status(400).send({ error: 'User not found!' });

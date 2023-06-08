@@ -81,69 +81,7 @@ function Payment() {
                 </div>
               </label>
             </div>
-            {/* <div className="form-check d-flex align-items-center mt-2">
-              <input
-                className="form-check-input me-2"
-                name="exampleRadios"
-                id="momo-wallet"
-                type="radio"
-                value="momo"
-                checked={valueRadio === 'momo'}
-                onChange={onChangeRadioCheckbox}
-              />
-              <label className="form-check-label" htmlFor="momo-wallet">
-                <div className="d-flex justify-content-center align-items-center">
-                  <Image
-                    width={37}
-                    height={37}
-                    src="https://www.cgv.vn/media/catalog/product/placeholder/default/momo_icon.png"
-                  />
-                  <span className="ms-1">Ví MoMo</span>
-                </div>
-              </label>
-            </div>
-            <div className="form-check d-flex align-items-center mt-2">
-              <input
-                className="form-check-input me-2"
-                name="exampleRadios"
-                id="zalo-pay"
-                type="radio"
-                value="zalo"
-                checked={valueRadio === 'zalo'}
-                onChange={onChangeRadioCheckbox}
-              />
-              <label className="form-check-label" htmlFor="zalo-pay">
-                <div className="d-flex justify-content-center align-items-center">
-                  <Image
-                    width={37}
-                    height={37}
-                    src="https://www.cgv.vn/media/catalog/product/placeholder/default/zalopay_icon.png"
-                  />
-                  <span className="ms-1">ZaloPay</span>
-                </div>
-              </label>
-            </div>
-            <div className="form-check d-flex align-items-center mt-2">
-              <input
-                className="form-check-input me-2"
-                name="exampleRadios"
-                id="viettel-pay"
-                type="radio"
-                value="viettel"
-                checked={valueRadio === 'viettel'}
-                onChange={onChangeRadioCheckbox}
-              />
-              <label className="form-check-label" htmlFor="viettel-pay">
-                <div className="d-flex justify-content-center align-items-center">
-                  <Image
-                    width={37}
-                    height={37}
-                    src="https://www.cgv.vn/media/catalog/product/placeholder/default/viettelpay-logo.jpg"
-                  />
-                  <span className="ms-1">ViettelPay</span>
-                </div>
-              </label>
-            </div> */}
+            
           </Col>
           <Col className="count_down_clock me-2" xs={2}>
             <div className="d-flex justify-content-center align-items-center h-100">

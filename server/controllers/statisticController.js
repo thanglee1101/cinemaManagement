@@ -1,10 +1,7 @@
 import { Movie, Cineplex, Cinema, Showtime, Booking, Ticket, sequelize } from '../models';
 import { Op } from 'sequelize';
 import moment from 'moment';
-const XLSX = require('xlsx');
-const XlsxPopulate = require('xlsx-populate');
 const ExcelJS = require('exceljs');
-const fs = require('fs');
 
 const getByCineplexs = async() => {
     try {
@@ -81,14 +78,10 @@ const getByCineplexs = async() => {
             });
             return result;
         }
-    } catch (error) {
-
-    }
+    } catch (error) {}
 };
-
 const getByMovies = async() => {
     try {
-
         const movies = await Movie.findAll({
             attributes: {
                 include: [
@@ -118,7 +111,6 @@ const getByMovies = async() => {
             }, ],
             group: ['"Movie"."id"'],
         });
-
         let result = {
             labels: [],
             datasets: [{
@@ -135,7 +127,6 @@ const getByMovies = async() => {
                 },
             ],
         };
-
         if (movies) {
             movies.map((movie) => {
                 result.labels.push(movie.title);
@@ -146,9 +137,7 @@ const getByMovies = async() => {
             });
             return result
         }
-    } catch (error) {
-
-    }
+    } catch (error) {}
 };
 const getByMonth = async() => {
     try {
@@ -163,13 +152,11 @@ const getByMonth = async() => {
         let result = {
             labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
             datasets: [{
-                    label: 'Doanh thu',
-                    data: [],
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                }
-
-            ],
+                label: 'Doanh thu',
+                data: [],
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            }],
         };
         if (totals) {
             totals.map((total) => {
@@ -179,9 +166,7 @@ const getByMonth = async() => {
             })
         }
         return result
-    } catch (error) {
-
-    }
+    } catch (error) {}
 }
 
 function sumArray(mang) {
@@ -198,7 +183,6 @@ const downloadReportMonth = async(req, res) => {
     const cells = ['G9', 'H9', 'I9', 'J9', 'K9', 'L9', 'M9', 'N9', 'O9', 'P9', 'Q9', 'R9']
     const sourceFilePath = 'statisticsCSV/reportMonthTem.xlsx'
     const destinationFilePath = 'statisticsCSV/reportMouth.xlsx'
-
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(destinationFilePath);
     const worksheet = workbook.getWorksheet('Sheet1');
@@ -213,28 +197,19 @@ const downloadReportMonth = async(req, res) => {
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Lưu ý: tháng bắt đầu từ 0 (tháng 0 là tháng 1)
     const day = String(currentDate.getDate()).padStart(2, '0');
-
     const formattedDate = `${year}-${month}-${day}`;
     worksheet.getCell('P6').value = formattedDate
-        // XLSX.writeFile(workbook, destinationFilePath);
     await workbook.xlsx.writeFile(destinationFilePath);
-
     console.log('Data written to file successfully');
-
     res.download(destinationFilePath);
-    // res.json({ data: data })
 }
 const downloadReportCineplex = async(req, res) => {
     const data = req.body
     console.log(data);
-
-    const sourceFilePath = 'statisticsCSV/reportCinemaplexTem.xlsx'
     const destinationFilePath = 'statisticsCSV/reportCinemaplex.xlsx'
-
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(destinationFilePath);
     const worksheet = workbook.getWorksheet('Sheet1');
-
     if (data) {
         const total = sumArray(data[1])
         for (var i = 0; i < data[0].length; i++) {
@@ -251,21 +226,14 @@ const downloadReportCineplex = async(req, res) => {
     worksheet.getCell('O7').value = formattedDate
     await workbook.xlsx.writeFile(destinationFilePath);
     console.log('Data written to file successfully');
-
     res.download(destinationFilePath);
-    // res.json({ data: data })
 }
 const downloadReportMovie = async(req, res) => {
     const data = req.body
-    console.log(data);
-
-
     const destinationFilePath = 'statisticsCSV/reportMoviesTem.xlsx'
-
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(destinationFilePath);
     const worksheet = workbook.getWorksheet('Sheet1');
-
     if (data) {
         const totalTick = sumArray(data[1])
         const totalRe = sumArray(data[2])
@@ -285,8 +253,6 @@ const downloadReportMovie = async(req, res) => {
     worksheet.getCell('M6').value = formattedDate
     await workbook.xlsx.writeFile(destinationFilePath);
     console.log('Data written to file successfully');
-
     res.download(destinationFilePath);
-    // res.json({ data: data })
 }
 export { getByCineplexs, getByMovies, getByMonth, downloadReportMonth, downloadReportCineplex, downloadReportMovie };

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { Bar, Pie, Line } from 'react-chartjs-2';
-import axiosClient from '../../../api/axiosClient';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
 import './styles.scss';
 import axios from 'axios';
 import io from 'socket.io-client';
@@ -123,7 +120,6 @@ function Statistic() {
         console.error('Lỗi khi tải xuống file Excel:', error);
       });
   }
-
   useEffect(() => {
     // Kết nối tới server Socket.IO
     const socket = io('http://localhost:5001', { transports: ['websocket'] });
@@ -194,16 +190,12 @@ function Statistic() {
           {stockData ? <Line data={stockData[1]} /> : null}
         </Col>
         <Col >
-
           <Col style={{ paddingLeft: "20%" }}>
-
             <Row>
               <Button className='mt-3' onClick={handleDownloadReportMovies} style={{ width: "25%" }}>Xuất doanh thu theo phim</Button>
-
             </Row>
             <Row>
               <Button className='mt-3' onClick={handleDownloadReportCineplex} style={{ width: "25%" }}>Xuất doanh thu theo rạp</Button>
-
             </Row>
             <Row>
               {stockData ?
@@ -212,9 +204,7 @@ function Statistic() {
                 <Button onClick={() => handleDownloadReportMonth([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])} className='mt-3' style={{ width: "25%" }}>Xuất doanh thu theo tháng</Button>
               }
             </Row>
-
           </Col>
-
         </Col>
       </Row>
     </div>

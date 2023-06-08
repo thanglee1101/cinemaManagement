@@ -26,13 +26,6 @@ function FormEdit(props) {
     dispatch(updateProfileAction(bodyFormData));
     props.handleClose();
   };
-
-  const onChangePicture = (e) => {
-    if (e.target.files.length !== 0) {
-      setPicture(URL.createObjectURL(e.target.files[0]));
-    }
-  };
-
   const isNumber = (e) => {
     e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
   };
@@ -41,17 +34,7 @@ function FormEdit(props) {
     <Form id="form-edit" onSubmit={handleSubmit(onSubmitData)}>
       <div className="d-flex flex-column align-items-center">
         <Image className="img-cover rounded-circle" src={picture} width={180} height={180} />
-        <Form.Group className="mt-3">
-          <Form.Control
-            type="file"
-            accept="image/*"
-            {...register('avatar')}
-            onChange={(e) => {
-              register('avatar').onChange(e);
-              onChangePicture(e);
-            }}
-          />
-        </Form.Group>
+        
       </div>
       <Row className="mt-3">
         <Col>
